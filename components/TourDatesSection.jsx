@@ -149,15 +149,15 @@ export default function TourDatesSection() {
         tl.to({}, { duration: 1.2 }); // respiro com todos visíveis antes de soltar
       });
 
-      // MOBILE: sem travar — cada card revela ao entrar na tela
+      // MOBILE: carrossel horizontal (swipe) — os cards aparecem em sequência ao entrar
       mm.add('(max-width: 1023.98px)', () => {
-        cards.forEach((c) => {
-          gsap.to(c, {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: c, start: 'top 90%', end: 'top 64%', scrub: true },
-          });
+        gsap.to(cards, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.1,
+          scrollTrigger: { trigger: list, start: 'top 82%', once: true },
         });
       });
     }, tall);
@@ -197,13 +197,17 @@ export default function TourDatesSection() {
               </p>
             </div>
 
-            {/* Cards — aparecem UM A UM conforme o scroll (fileira no desktop, empilhados no mobile) */}
+            {/* Cards — desktop: fileira (trava + revela um a um) · mobile: carrossel horizontal (swipe) */}
             <div
               ref={listRef}
-              className="mt-10 flex flex-col gap-4 lg:mt-12 lg:flex-row lg:items-stretch lg:gap-4"
+              className="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:px-8 lg:mx-0 lg:mt-12 lg:items-stretch lg:overflow-visible lg:px-0 lg:pb-0"
             >
               {TOUR_DATES.map((date) => (
-                <div data-tour-card key={date.id} className="lg:min-w-0 lg:flex-1">
+                <div
+                  data-tour-card
+                  key={date.id}
+                  className="w-[80vw] max-w-[300px] shrink-0 snap-center lg:w-auto lg:min-w-0 lg:max-w-none lg:flex-1"
+                >
                   <TourCard date={date} />
                 </div>
               ))}

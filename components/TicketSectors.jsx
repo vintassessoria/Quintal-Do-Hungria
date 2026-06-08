@@ -42,7 +42,7 @@ export default function TicketSectors() {
                 >
                   {/* atmosfera de fundo, sutilmente distinta */}
                   <div
-                    className={`pointer-events-none absolute inset-0 transition-opacity duration-500 group-hover:opacity-120 ${
+                    className={`pointer-events-none absolute inset-0 opacity-90 transition-opacity duration-500 group-hover:opacity-100 ${
                       warm
                         ? 'bg-[radial-gradient(circle_at_82%_18%,rgba(252,157,0,0.32),transparent_55%),radial-gradient(circle_at_20%_85%,rgba(241,37,105,0.18),transparent_60%)]'
                         : 'bg-[radial-gradient(circle_at_15%_85%,rgba(241,37,105,0.16),transparent_60%),radial-gradient(circle_at_80%_15%,rgba(252,157,0,0.06),transparent_55%)]'

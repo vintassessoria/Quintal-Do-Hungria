@@ -66,6 +66,11 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink/60 via-transparent to-ink/45" />
       <div className="bg-grain pointer-events-none absolute inset-0 z-[2] opacity-40" />
 
+      {/* glow suave atrás da figura (substitui o drop-shadow — sem o artefato de recorte) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] flex justify-center">
+        <div className="h-[46svh] w-[78%] max-w-[560px] -translate-y-[16%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(241,37,105,0.3),rgba(252,157,0,0.1)_45%,transparent_66%)] blur-[64px]" />
+      </div>
+
       {/* ── Figura central (Hungria — busto recortado). Mobile: sobe a imagem ── */}
       {artistOk && (
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] flex -translate-y-[19svh] justify-center sm:translate-y-0">
@@ -74,7 +79,7 @@ export default function HeroSection() {
             src="/assets/quintal/artist/hungria.webp"
             alt="Hungria"
             onError={() => setArtistOk(false)}
-            className="h-[66svh] w-auto max-w-none object-contain object-bottom opacity-[0.97] sm:h-[74svh] lg:h-[82svh] [filter:drop-shadow(0_10px_60px_rgba(241,37,105,0.45))] [mask-image:linear-gradient(to_bottom,#000_74%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_74%,transparent)]"
+            className="h-[66svh] w-auto max-w-none object-contain object-bottom opacity-[0.97] sm:h-[74svh] lg:h-[82svh] [mask-image:linear-gradient(to_bottom,#000_74%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_74%,transparent)]"
           />
         </div>
       )}
