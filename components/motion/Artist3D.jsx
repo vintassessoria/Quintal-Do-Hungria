@@ -13,9 +13,10 @@ export default function Artist3D({ children, className = '', maxY = 18, maxX = 1
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (matchMedia('(pointer: coarse)').matches) return;
     const el = ref.current;
     if (!el) return;
+    // touch (mobile): sem cursor → oscila sozinho (auto-sway 3D)
+    const coarse = matchMedia('(pointer: coarse)').matches;
 
     let rx = 0;
     let ry = 0;
@@ -23,16 +24,32 @@ export default function Artist3D({ children, className = '', maxY = 18, maxX = 1
     let trY = 0;
     let raf = 0;
 
-    const loop = () => {
+    const loop = (now) => {
+      if (coarse) {
+        const t = (now || 0) / 1000;
+        trY = Math.sin(t * 0.55) * maxY * 0.7; // vai-e-vem horizontal
+        trx = Math.sin(t * 0.4 + 1.0) * maxX * 0.6; // leve inclinação
+      }
       rx += (trx - rx) * 0.08;
       ry += (trY - ry) * 0.08;
       el.style.transform = `perspective(1100px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      if (coarse) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
       if (Math.abs(trx - rx) > 0.02 || Math.abs(trY - ry) > 0.02) {
         raf = requestAnimationFrame(loop);
       } else {
         raf = 0;
       }
     };
+
+    if (coarse) {
+      raf = requestAnimationFrame(loop);
+      return () => {
+        if (raf) cancelAnimationFrame(raf);
+      };
+    }
 
     const onMove = (e) => {
       const cx = e.clientX / window.innerWidth - 0.5; // -0.5..0.5

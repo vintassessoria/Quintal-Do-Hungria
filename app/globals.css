@@ -465,6 +465,22 @@ html {
   animation-iteration-count: infinite;
   will-change: transform, opacity;
 }
+/* float suave da figura do Hungria — só em telas de toque (mobile), p/ dar vida sem cursor */
+@keyframes heroFigFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.8%);
+  }
+}
+@media (pointer: coarse) {
+  .hero-fig-float {
+    animation: heroFigFloat 6.5s ease-in-out infinite;
+    will-change: transform;
+  }
+}
 /* anel de acento girando atrás do mapa (toque 360° limpo) */
 @keyframes mapRingSpin {
   from {

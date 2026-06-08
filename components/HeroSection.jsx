@@ -51,10 +51,10 @@ export default function HeroSection() {
 
       {/* (Folhas do topo removidas — hero mais limpo) */}
 
-      {/* ── Wordmark fantasma atrás ── */}
+      {/* ── Wordmark fantasma atrás (escondido no celular) ── */}
       <div
         data-hero-wordmark
-        className="pointer-events-none absolute inset-x-0 top-[11%] z-[1] flex justify-center sm:top-[13%]"
+        className="pointer-events-none absolute inset-x-0 top-[11%] z-[1] hidden justify-center sm:top-[13%] sm:flex"
       >
         <span className="font-display select-none whitespace-nowrap text-[22vw] leading-none text-white/[0.06] blur-[2px] sm:text-[28vw] lg:text-[18rem]">
           HUNGRIA
@@ -74,13 +74,15 @@ export default function HeroSection() {
       {/* ── Figura central (Hungria — busto recortado). Mobile: sobe a imagem ── */}
       {artistOk && (
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] flex -translate-y-[19svh] justify-center sm:translate-y-0">
-          <img
-            data-hero-figure
-            src="/assets/quintal/artist/hungria.webp"
-            alt="Hungria"
-            onError={() => setArtistOk(false)}
-            className="h-[66svh] w-auto max-w-none object-contain object-bottom opacity-[0.97] sm:h-[74svh] lg:h-[82svh] [mask-image:linear-gradient(to_bottom,#000_74%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_74%,transparent)]"
-          />
+          <div className="hero-fig-float">
+            <img
+              data-hero-figure
+              src="/assets/quintal/artist/hungria.webp"
+              alt="Hungria"
+              onError={() => setArtistOk(false)}
+              className="h-[66svh] w-auto max-w-none object-contain object-bottom opacity-[0.97] sm:h-[74svh] lg:h-[82svh] [mask-image:linear-gradient(to_bottom,#000_74%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_74%,transparent)]"
+            />
+          </div>
         </div>
       )}
 

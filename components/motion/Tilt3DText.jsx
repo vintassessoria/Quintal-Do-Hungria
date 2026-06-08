@@ -13,9 +13,10 @@ export default function Tilt3DText({ children, className = '', maxX = 9, maxY = 
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (matchMedia('(pointer: coarse)').matches) return;
     const el = ref.current;
     if (!el) return;
+    // touch (mobile): sem cursor → oscila sozinho (auto-sway 3D)
+    const coarse = matchMedia('(pointer: coarse)').matches;
 
     let rx = 0;
     let ry = 0;
@@ -23,16 +24,32 @@ export default function Tilt3DText({ children, className = '', maxX = 9, maxY = 
     let trY = 0;
     let raf = 0;
 
-    const loop = () => {
+    const loop = (now) => {
+      if (coarse) {
+        const t = (now || 0) / 1000;
+        trY = Math.sin(t * 0.5) * maxY * 0.6;
+        trx = Math.sin(t * 0.38 + 0.8) * maxX * 0.5;
+      }
       rx += (trx - rx) * 0.09;
       ry += (trY - ry) * 0.09;
       el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      if (coarse) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
       if (Math.abs(trx - rx) > 0.02 || Math.abs(trY - ry) > 0.02) {
         raf = requestAnimationFrame(loop);
       } else {
         raf = 0;
       }
     };
+
+    if (coarse) {
+      raf = requestAnimationFrame(loop);
+      return () => {
+        if (raf) cancelAnimationFrame(raf);
+      };
+    }
 
     const clamp = (v) => Math.max(-1, Math.min(1, v));
     const onMove = (e) => {
