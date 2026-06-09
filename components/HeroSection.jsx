@@ -45,6 +45,44 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  // Profundidade 3D (desktop): o cursor desloca figura, wordmark e glow em
+  // velocidades diferentes (parallax de camadas) + leve giro do Hungria.
+  // Elementos distintos dos que o GSAP anima → zero conflito. Só transform.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (matchMedia('(pointer: coarse)').matches) return;
+    const sec = sectionRef.current;
+    if (!sec) return;
+    const fig = sec.querySelector('.hero-fig-float');
+    const wm = sec.querySelector('[data-hero-wordmark] span');
+    const glow = sec.querySelector('[data-hero-glow]');
+    if (!fig && !wm && !glow) return;
+
+    let x = 0, y = 0, tx = 0, ty = 0, raf = 0;
+    const loop = () => {
+      x += (tx - x) * 0.07;
+      y += (ty - y) * 0.07;
+      if (fig)
+        fig.style.transform = `perspective(1200px) translate3d(${(x * 14).toFixed(1)}px, ${(y * 8).toFixed(1)}px, 0) rotateY(${(x * 3.5).toFixed(2)}deg)`;
+      if (wm)
+        wm.style.transform = `translate3d(${(-x * 26).toFixed(1)}px, ${(-y * 10).toFixed(1)}px, 0)`;
+      if (glow)
+        glow.style.transform = `translate3d(${(x * 20).toFixed(1)}px, ${(y * 12).toFixed(1)}px, 0)`;
+      if (Math.abs(tx - x) > 0.001 || Math.abs(ty - y) > 0.001) raf = requestAnimationFrame(loop);
+      else raf = 0;
+    };
+    const onMove = (e) => {
+      tx = (e.clientX / window.innerWidth - 0.5) * 2; // -1..1
+      ty = (e.clientY / window.innerHeight - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <section ref={sectionRef} id="topo" className="relative min-h-[100svh] overflow-hidden">
       {/* Fundo: gradiente animado FIXO global (vem do app/page.jsx) — seção transparente */}
@@ -67,7 +105,7 @@ export default function HeroSection() {
       <div className="bg-grain pointer-events-none absolute inset-0 z-[2] opacity-40" />
 
       {/* glow suave atrás da figura (substitui o drop-shadow — sem o artefato de recorte) */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] flex justify-center">
+      <div data-hero-glow className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] flex justify-center">
         <div className="h-[46svh] w-[78%] max-w-[560px] -translate-y-[16%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(241,37,105,0.3),rgba(252,157,0,0.1)_45%,transparent_66%)] blur-[64px]" />
       </div>
 

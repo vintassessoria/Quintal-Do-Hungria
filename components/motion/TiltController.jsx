@@ -3,27 +3,39 @@
 import { useEffect } from 'react';
 
 /**
- * Efeito 3D real (tilt em perspectiva) em TODOS os cards do site.
- * • Alvos: `.card-premium` e `.tilt-3d`.
- * • Cada card rotaciona em 3D seguindo o cursor (rotateX/rotateY) + "sobe"
- *   (translateZ) e ganha um brilho (glare) que acompanha o mouse.
- * • Suavizado por rAF. Desliga em touch e reduced-motion. Sem JS = card normal.
+ * Tilt 3D premium em TODOS os cards (.card-premium, .tilt-3d) — v2.
+ * • Física de MOLA real (velocidade + amortecimento): impulso → leve
+ *   overshoot → assenta. Sensação física, não robótica.
+ * • Brilho (glare) segue o cursor e a intensidade acompanha a inclinação.
+ * • Rotação calibrada pelo tamanho: cards grandes inclinam menos (cinema),
+ *   cards pequenos respondem mais.
+ * • Leve: só transform/opacity (GPU), rAF por card ativo, para ao assentar.
+ * Desktop only — no touch o feedback é o "press" via CSS (globals).
  */
 export default function TiltController() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (matchMedia('(pointer: coarse)').matches) return; // sem tilt em touch
-    // Motion sempre ligado — não respeita reduce-motion.
+    if (matchMedia('(pointer: coarse)').matches) return;
 
     const cards = Array.from(document.querySelectorAll('.card-premium, .tilt-3d'));
     if (!cards.length) return;
 
-    const MAX = 11; // graus máximos de rotação
-    const LIFT = 24; // px de translateZ no hover
+    const LIFT = 26; // px de translateZ no hover
+    const STIFF = 0.085; // rigidez da mola
+    const DAMP = 0.8; // amortecimento (<1 → assenta com leve overshoot)
     const cleanups = [];
 
     cards.forEach((card) => {
-      const st = { rx: 0, ry: 0, lz: 0, trx: 0, try: 0, tlz: 0, raf: 0, active: false };
+      // cards largos inclinam menos → leitura mais cinematográfica
+      const r0 = card.getBoundingClientRect();
+      const MAX = Math.max(6, Math.min(12, 4200 / Math.max(r0.width, r0.height, 1)));
+
+      const st = {
+        rx: 0, ry: 0, lz: 0,
+        vx: 0, vy: 0, vz: 0,
+        trx: 0, try: 0, tlz: 0,
+        raf: 0, active: false,
+      };
       card.style.willChange = 'transform';
 
       // brilho/glare que segue o cursor pela superfície
@@ -32,16 +44,24 @@ export default function TiltController() {
       card.appendChild(glare);
 
       const tick = () => {
-        st.rx += (st.trx - st.rx) * 0.14;
-        st.ry += (st.try - st.ry) * 0.14;
-        st.lz += (st.tlz - st.lz) * 0.14;
+        // mola amortecida por eixo
+        st.vx = (st.vx + (st.trx - st.rx) * STIFF) * DAMP;
+        st.vy = (st.vy + (st.try - st.ry) * STIFF) * DAMP;
+        st.vz = (st.vz + (st.tlz - st.lz) * STIFF) * DAMP;
+        st.rx += st.vx;
+        st.ry += st.vy;
+        st.lz += st.vz;
+
         card.style.transform = `perspective(950px) rotateX(${st.rx.toFixed(2)}deg) rotateY(${st.ry.toFixed(2)}deg) translateZ(${st.lz.toFixed(1)}px)`;
+
+        // brilho proporcional à inclinação (0.45 → 1)
+        const mag = Math.min(1, (Math.abs(st.rx) + Math.abs(st.ry)) / (MAX * 1.4));
+        card.style.setProperty('--tilt-glow', (0.45 + mag * 0.55).toFixed(2));
 
         const settled =
           !st.active &&
-          Math.abs(st.rx) < 0.04 &&
-          Math.abs(st.ry) < 0.04 &&
-          Math.abs(st.lz) < 0.2;
+          Math.abs(st.rx) < 0.03 && Math.abs(st.ry) < 0.03 && Math.abs(st.lz) < 0.15 &&
+          Math.abs(st.vx) < 0.03 && Math.abs(st.vy) < 0.03 && Math.abs(st.vz) < 0.15;
         if (settled) {
           card.style.transform = '';
           card.style.transition = '';

@@ -24,8 +24,10 @@ export default function Artist3D({ children, className = '', maxY = 18, maxX = 1
     let trY = 0;
     let raf = 0;
 
+    let gyro = false; // vira true quando o giroscópio entrega dados (Android etc.)
+
     const loop = (now) => {
-      if (coarse) {
+      if (coarse && !gyro) {
         const t = (now || 0) / 1000;
         trY = Math.sin(t * 0.55) * maxY * 0.7; // vai-e-vem horizontal
         trx = Math.sin(t * 0.4 + 1.0) * maxX * 0.6; // leve inclinação
@@ -45,8 +47,20 @@ export default function Artist3D({ children, className = '', maxY = 18, maxX = 1
     };
 
     if (coarse) {
+      // GIROSCÓPIO: inclinar o aparelho gira o elemento (quando o navegador
+      // entrega eventos sem pedir permissão — Android). iOS fica no auto-sway.
+      const onOrient = (e) => {
+        if (e.gamma == null || e.beta == null) return;
+        gyro = true;
+        const g = Math.max(-28, Math.min(28, e.gamma)); // lateral
+        const b = Math.max(-28, Math.min(28, e.beta - 50)); // frente/trás (desconta a pegada ~50°)
+        trY = (g / 28) * maxY;
+        trx = (-b / 28) * maxX;
+      };
+      window.addEventListener('deviceorientation', onOrient, true);
       raf = requestAnimationFrame(loop);
       return () => {
+        window.removeEventListener('deviceorientation', onOrient, true);
         if (raf) cancelAnimationFrame(raf);
       };
     }

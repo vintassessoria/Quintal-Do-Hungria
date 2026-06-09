@@ -24,8 +24,10 @@ export default function Tilt3DText({ children, className = '', maxX = 9, maxY = 
     let trY = 0;
     let raf = 0;
 
+    let gyro = false; // vira true quando o giroscópio entrega dados (Android etc.)
+
     const loop = (now) => {
-      if (coarse) {
+      if (coarse && !gyro) {
         const t = (now || 0) / 1000;
         trY = Math.sin(t * 0.5) * maxY * 0.6;
         trx = Math.sin(t * 0.38 + 0.8) * maxX * 0.5;
@@ -45,8 +47,19 @@ export default function Tilt3DText({ children, className = '', maxX = 9, maxY = 
     };
 
     if (coarse) {
+      // GIROSCÓPIO: inclinar o aparelho inclina o título (Android; iOS = sway)
+      const onOrient = (e) => {
+        if (e.gamma == null || e.beta == null) return;
+        gyro = true;
+        const g = Math.max(-28, Math.min(28, e.gamma));
+        const b = Math.max(-28, Math.min(28, e.beta - 50));
+        trY = (g / 28) * maxY * 0.8;
+        trx = (-b / 28) * maxX * 0.8;
+      };
+      window.addEventListener('deviceorientation', onOrient, true);
       raf = requestAnimationFrame(loop);
       return () => {
+        window.removeEventListener('deviceorientation', onOrient, true);
         if (raf) cancelAnimationFrame(raf);
       };
     }

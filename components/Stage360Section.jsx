@@ -56,7 +56,7 @@ export default function Stage360Section() {
               <img
                 src="/assets/quintal/mapa-3d.webp"
                 alt="Mapa 3D do Quintal do Hungria — Palco 360° no centro, com Frontstage, Backstage e passarelas"
-                className="h-full w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+                className="h-full w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)] [transform:translateZ(46px)]"
               />
             </Artist3D>
           </div>

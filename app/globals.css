@@ -410,7 +410,20 @@ html {
   mix-blend-mode: soft-light;
 }
 .is-tilting .tilt-glare {
-  opacity: 1;
+  /* intensidade dirigida pelo TiltController (acompanha a inclinação) */
+  opacity: var(--tilt-glow, 1);
+}
+
+/* Touch: feedback tátil de "pressionar" nos cards (não há hover no celular) */
+@media (pointer: coarse) {
+  .card-premium,
+  .tilt-3d {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-premium:active,
+  .tilt-3d:active {
+    transform: scale(0.975);
+  }
 }
 
 /* ─────────────── Hungria no hero — flutuação viva ─────────────────── */
