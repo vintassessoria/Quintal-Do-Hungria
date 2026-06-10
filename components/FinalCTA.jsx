@@ -67,8 +67,8 @@ export default function FinalCTA() {
 
         <Reveal delay={0.16}>
           <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Prepare-se para uma noite inesquecível com o Hungria — do pôr do sol ao centro da
-            noite. A próxima parada é {EVENT.city}, {EVENT.date}.
+            Prepare-se para uma noite inesquecível no Quintal do Hungria. A próxima parada é{' '}
+            {EVENT.city}, {EVENT.date}.
           </p>
         </Reveal>
 

@@ -18,7 +18,7 @@ const siteUrl =
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Quintal do Hungria — Do pôr do sol ao centro da noite',
+  title: 'Quintal do Hungria',
   description:
     'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto, 25 de julho, Arena NicNet. Ingressos pela GuichêWeb.',
   applicationName: 'Quintal do Hungria',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Do pôr do sol ao centro da noite: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho · Arena NicNet.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho · Arena NicNet.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Do pôr do sol ao centro da noite: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho.',
   },
   robots: {
     index: true,

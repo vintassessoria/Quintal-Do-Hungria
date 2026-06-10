@@ -139,9 +139,8 @@ export default function HeroSection() {
               A turnê · Próxima parada: {EVENT.city}
             </span>
             <h1 className="font-display mt-4 text-5xl leading-[0.9] drop-shadow-[0_6px_30px_rgba(0,0,0,0.55)] sm:text-6xl">
-              <span className="block text-white">Do pôr do sol</span>
-              <span className="block text-white">ao centro</span>
-              <span className="block text-gradient">da noite.</span>
+              <span className="block text-white">Quintal</span>
+              <span className="block text-gradient">do Hungria.</span>
             </h1>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65 sm:text-base">
               <span className="font-semibold text-white">6 horas</span> de experiência em 360°, com{' '}
