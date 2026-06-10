@@ -67,7 +67,7 @@ export default function Footer() {
           <img
             src="/assets/quintal/partners/partners-row.png"
             alt="Realização: Best, Hungria e MVR Produções e Negócios Artísticos"
-            className="w-full max-w-[360px] opacity-50 transition-opacity duration-500 hover:opacity-90 sm:max-w-[420px]"
+            className="w-full max-w-[200px] opacity-45 transition-opacity duration-500 hover:opacity-85 sm:max-w-[240px]"
           />
         </div>
 
