@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { MapPin } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { TOUR_DATES } from '@/lib/event';
-import { gsap, ScrollTrigger } from '@/lib/gsap';
 import GradientButton from './ui/GradientButton';
+import Reveal from './ui/Reveal';
 import SectionTag from './ui/SectionTag';
 
 /* ══════════════════════════════════════════════════════════════════════
-   SEÇÃO — TURNÊ (cards + trava + revelação um por um)
-   Desktop: a tela TRAVA (position:sticky) e os CARDS aparecem um a um (da
-   esquerda p/ a direita) atrelados ao scroll. Mobile: cards empilhados,
-   cada um revela ao entrar na tela (sem travar).
+   SEÇÃO — TURNÊ / EDIÇÕES (deck 3D em leque)
+   Card ativo de frente no centro; vizinhos girados em perspectiva atrás
+   (estilo "baralho aberto"). Setas + bolinhas, swipe no touch, clique no
+   card lateral traz pro centro, auto-rotação suave (pausa no hover).
    ────────────────────────────────────────────────────────────────────── */
 
 function StatusDot({ status }) {
@@ -51,44 +51,42 @@ function ActionCell({ date }) {
   );
 }
 
-function TourCard({ date }) {
-  const active = date.status === 'active';
+function TourCard({ date, active }) {
   const soon = date.status === 'soon';
+  const hot = date.status === 'active';
 
   return (
     <article
-      className={`group relative flex h-full min-h-[300px] flex-col justify-between overflow-hidden rounded-[1.5rem] border p-6 ${
-        active
-          ? 'border-ember/40 bg-gradient-to-b from-ember/[0.14] via-white/[0.02] to-transparent shadow-[0_0_50px_-12px_rgba(241,37,105,0.6)]'
-          : 'border-white/10 bg-white/[0.025]'
-      } ${soon ? 'opacity-60' : ''}`}
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[1.5rem] border p-6 ${
+        hot
+          ? 'border-ember/40 bg-gradient-to-b from-ember/[0.16] via-ink-2 to-ink shadow-[0_0_60px_-10px_rgba(241,37,105,0.65)]'
+          : 'border-white/10 bg-gradient-to-b from-white/[0.05] via-ink-2 to-ink'
+      } ${soon && !active ? 'opacity-90' : ''}`}
     >
-      {active && (
+      {hot && (
         <span className="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand-gradient shadow-[0_0_18px_rgba(241,37,105,0.55)]" />
       )}
 
-      {/* topo: status + selo */}
       <div className="flex items-center justify-between">
         <StatusDot status={date.status} />
-        {active && (
+        {hot && (
           <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/[0.12] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white">
-            Próxima
+            Próxima parada
           </span>
         )}
       </div>
 
-      {/* meio: data + cidade + local */}
       <div>
         {soon ? (
           <span className="font-display text-4xl leading-none text-white/45">Em breve</span>
         ) : (
           <div className="flex items-baseline gap-1.5 leading-none">
-            <span className={`font-display text-5xl ${active ? 'text-gradient' : 'text-white'}`}>
+            <span className={`font-display text-6xl ${hot ? 'text-gradient' : 'text-white'}`}>
               {date.day}
             </span>
             <span
               className={`text-xs font-semibold uppercase tracking-[0.18em] ${
-                active ? 'text-gold/90' : 'text-white/45'
+                hot ? 'text-gold/90' : 'text-white/45'
               }`}
             >
               {date.month}
@@ -96,7 +94,7 @@ function TourCard({ date }) {
           </div>
         )}
 
-        <h3 className={`font-display mt-3 text-2xl leading-tight ${active ? 'text-white' : 'text-white/90'}`}>
+        <h3 className={`font-display mt-3 text-3xl leading-tight ${hot ? 'text-white' : 'text-white/90'}`}>
           {date.city}
         </h3>
 
@@ -112,7 +110,6 @@ function TourCard({ date }) {
         )}
       </div>
 
-      {/* base: ação */}
       <div className="mt-5">
         <ActionCell date={date} />
       </div>
@@ -121,105 +118,264 @@ function TourCard({ date }) {
 }
 
 export default function TourDatesSection() {
-  const tallRef = useRef(null);
-  const listRef = useRef(null);
+  const n = TOUR_DATES.length;
+  const [idx, setIdx] = useState(0); // começa em Ribeirão Preto (ativo)
+  const [compact, setCompact] = useState(false);
+  const deckRef = useRef(null);
+  const hovering = useRef(false);
+  const inView = useRef(true);
+  const timer = useRef(0);
+  const swipe = useRef(null);
+  const idxRef = useRef(0);
+  const tiltEls = useRef({}); // i → camada interna que recebe o tilt do cursor
+
+  const go = useCallback((i) => setIdx(((i % n) + n) % n), [n]);
+  const next = useCallback(() => setIdx((v) => (v + 1) % n), [n]);
+  const prev = useCallback(() => setIdx((v) => (v - 1 + n) % n), [n]);
+
+  // auto-rotação (pausa no hover / fora da tela); reinicia ao interagir
+  const restart = useCallback(() => {
+    window.clearInterval(timer.current);
+    timer.current = window.setInterval(() => {
+      if (!hovering.current && inView.current) next();
+    }, 4500);
+  }, [next]);
+
+  useEffect(() => {
+    restart();
+    return () => window.clearInterval(timer.current);
+  }, [restart]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const tall = tallRef.current;
-    const list = listRef.current;
-    if (!tall || !list) return;
-    const cards = gsap.utils.toArray('[data-tour-card]', list);
-    if (!cards.length) return;
-
-    const ctx = gsap.context(() => {
-      // começam escondidos (opacidade no WRAPPER → preserva o dim das "soon")
-      gsap.set(cards, { opacity: 0, y: 50 });
-
-      const mm = gsap.matchMedia();
-
-      // DESKTOP: a tela TRAVA (sticky) e os cards aparecem um a um com o scroll
-      mm.add('(min-width: 1024px)', () => {
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: tall, start: 'top top', end: 'bottom bottom', scrub: 0.8 },
-        });
-        cards.forEach((c, i) => {
-          tl.to(c, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, i * 0.8);
-        });
-        tl.to({}, { duration: 1.2 }); // respiro com todos visíveis antes de soltar
-      });
-
-      // MOBILE: carrossel horizontal (swipe) — os cards aparecem em sequência ao entrar
-      mm.add('(max-width: 1023.98px)', () => {
-        gsap.to(cards, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.1,
-          scrollTrigger: { trigger: list, start: 'top 82%', once: true },
-        });
-      });
-    }, tall);
-
-    return () => ctx.revert();
+    const mq = matchMedia('(max-width: 639px)');
+    const apply = () => setCompact(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    const io = new IntersectionObserver(([en]) => { inView.current = en.isIntersecting; }, { threshold: 0.15 });
+    if (deckRef.current) io.observe(deckRef.current);
+    return () => {
+      mq.removeEventListener('change', apply);
+      io.disconnect();
+    };
   }, []);
 
+  // tilt do card CENTRAL seguindo o cursor (desktop) — em camada interna,
+  // pra não brigar com a transição de leque do wrapper
+  useEffect(() => {
+    idxRef.current = idx;
+    // ao trocar de card, zera o tilt de todos (o novo começa neutro)
+    Object.values(tiltEls.current).forEach((el) => {
+      if (el) el.style.transform = '';
+    });
+  }, [idx]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (matchMedia('(pointer: coarse)').matches) return;
+    const deck = deckRef.current;
+    if (!deck) return;
+    let raf = 0, cx = 0, cy = 0, tx = 0, ty = 0;
+    const loop = () => {
+      cx += (tx - cx) * 0.1;
+      cy += (ty - cy) * 0.1;
+      const el = tiltEls.current[idxRef.current];
+      if (el)
+        el.style.transform = `rotateX(${(-cy * 5).toFixed(2)}deg) rotateY(${(cx * 7).toFixed(2)}deg) translateZ(14px)`;
+      if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) raf = requestAnimationFrame(loop);
+      else raf = 0;
+    };
+    const onMove = (e) => {
+      const r = deck.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    const onLeave = () => {
+      tx = 0;
+      ty = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    deck.addEventListener('pointermove', onMove, { passive: true });
+    deck.addEventListener('pointerleave', onLeave);
+    return () => {
+      deck.removeEventListener('pointermove', onMove);
+      deck.removeEventListener('pointerleave', onLeave);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // distância circular assinada do card ativo (-2..2 com 5 cards)
+  const offFor = (i) => {
+    let d = (i - idx + n) % n;
+    if (d > n / 2) d -= n;
+    return d;
+  };
+
+  const X1 = compact ? 130 : 265; // deslocamento dos vizinhos
+  const X2 = compact ? 215 : 485; // deslocamento dos de trás
+  const styleFor = (off) => {
+    const a = Math.abs(off);
+    const x = off === 0 ? 0 : Math.sign(off) * (a === 1 ? X1 : X2);
+    const ry = off === 0 ? 0 : -Math.sign(off) * (a === 1 ? 20 : 30);
+    const z = a === 0 ? 0 : a === 1 ? -140 : -280;
+    const s = a === 0 ? 1 : a === 1 ? 0.86 : 0.74;
+    return {
+      transform: `translateX(calc(-50% + ${x}px)) translateZ(${z}px) rotateY(${ry}deg) scale(${s})`,
+      zIndex: 30 - a * 10,
+      filter: a === 0 ? 'none' : `brightness(${a === 1 ? 0.6 : 0.42}) saturate(${a === 1 ? 0.9 : 0.8})`,
+      opacity: a === 2 ? 0.9 : 1,
+    };
+  };
+
+  // swipe no touch (e arraste com mouse)
+  const onPointerDown = (e) => { swipe.current = e.clientX; };
+  const onPointerUp = (e) => {
+    if (swipe.current == null) return;
+    const dx = e.clientX - swipe.current;
+    swipe.current = null;
+    if (dx < -40) { next(); restart(); }
+    else if (dx > 40) { prev(); restart(); }
+  };
+
   return (
-    <section id="turne" className="relative bg-ink-2">
-      {/* contêiner ALTO no desktop → distância de scroll p/ a "trava" (sticky) */}
-      <div ref={tallRef} className="relative lg:h-[200vh]">
-        {/* wrapper STICKY no desktop = a tela trava aqui enquanto os cards aparecem */}
-        <div className="bg-grain relative overflow-hidden py-24 sm:py-32 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:py-0">
-          {/* brilho atmosférico quente sutil */}
-          <div
-            data-parallax="0.07"
-            className="pointer-events-none absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(241,37,105,0.1),transparent_70%)] blur-3xl"
-          />
-          <div
-            data-parallax="0.11"
-            className="pointer-events-none absolute -right-24 bottom-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(252,157,0,0.08),transparent_70%)] blur-3xl"
-          />
+    <section id="turne" className="bg-grain relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+      {/* brilho atmosférico quente sutil */}
+      <div
+        data-parallax="0.07"
+        className="pointer-events-none absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(241,37,105,0.1),transparent_70%)] blur-3xl"
+      />
+      <div
+        data-parallax="0.11"
+        className="pointer-events-none absolute -right-24 bottom-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(252,157,0,0.08),transparent_70%)] blur-3xl"
+      />
 
-          <div className="mx-auto w-full max-w-wrap px-5 sm:px-8">
-            {/* Cabeçalho */}
-            <div className="max-w-2xl">
-              <SectionTag>A turnê</SectionTag>
-              <h2 className="font-display mt-7 text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
-                Quintal do Hungria
-                <br />
-                <span className="text-gradient">na estrada</span>
-              </h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-                A próxima parada é <span className="font-semibold text-white">Ribeirão Preto</span>, em{' '}
-                <span className="font-semibold text-white">25 de julho</span>. Os ingressos já estão à
-                venda — as demais cidades serão anunciadas em breve.
-              </p>
-            </div>
-
-            {/* Cards — desktop: fileira (trava + revela um a um) · mobile: carrossel horizontal (swipe) */}
-            <div
-              ref={listRef}
-              className="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:px-8 lg:mx-0 lg:mt-12 lg:items-stretch lg:overflow-visible lg:px-0 lg:pb-0"
-            >
-              {TOUR_DATES.map((date) => (
-                <div
-                  data-tour-card
-                  key={date.id}
-                  className="w-[80vw] max-w-[300px] shrink-0 snap-center lg:w-auto lg:min-w-0 lg:max-w-none lg:flex-1"
-                >
-                  <TourCard date={date} />
-                </div>
-              ))}
-            </div>
-
-            {/* Rodapé */}
-            <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
-              Vendas oficiais pela GuichêWeb · Ribeirão Preto é a próxima data
-            </p>
-          </div>
-        </div>
+      <div className="mx-auto w-full max-w-wrap px-5 sm:px-8">
+        {/* Cabeçalho */}
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <SectionTag className="mx-auto">As edições</SectionTag>
+          <h2 className="font-display mt-7 text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
+            Quintal do Hungria
+            <br />
+            <span className="text-gradient">na estrada</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+            A próxima parada é <span className="font-semibold text-white">Ribeirão Preto</span>, em{' '}
+            <span className="font-semibold text-white">25 de julho</span>. Os ingressos já estão à
+            venda — as demais cidades serão anunciadas em breve.
+          </p>
+        </Reveal>
       </div>
+
+      {/* ── Deck 3D em leque ── */}
+      <Reveal delay={0.1}>
+        <div
+          ref={deckRef}
+          className="relative mx-auto mt-12 h-[510px] w-full select-none sm:mt-14 sm:h-[580px] [perspective:1400px]"
+          onPointerEnter={() => { hovering.current = true; }}
+          onPointerLeave={() => { hovering.current = false; }}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+        >
+          {/* luz de palco sob o deck */}
+          <div className="pointer-events-none absolute bottom-6 left-1/2 h-28 w-[80%] max-w-[680px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(241,37,105,0.26),rgba(252,157,0,0.08)_55%,transparent_75%)] blur-2xl" />
+
+          {TOUR_DATES.map((date, i) => {
+            const off = offFor(i);
+            return (
+              <div
+                key={date.id}
+                className={`absolute left-1/2 top-0 h-[430px] w-[82vw] max-w-[320px] transition-[transform,filter,opacity] duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-[460px] sm:w-[340px] sm:max-w-none [transform-style:preserve-3d] ${
+                  off !== 0 ? 'cursor-pointer' : ''
+                }`}
+                style={styleFor(off)}
+                onClickCapture={(e) => {
+                  if (off !== 0) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    go(i);
+                    restart();
+                  }
+                }}
+              >
+                {/* camada 1: flutuação suave (só no card ativo) */}
+                <div className={`h-full ${off === 0 ? 'deck-float' : ''}`}>
+                  {/* camada 2: tilt do cursor (escrita pelo rAF) */}
+                  <div
+                    ref={(el) => { tiltEls.current[i] = el; }}
+                    className="relative h-full will-change-transform [transform-style:preserve-3d]"
+                  >
+                    <TourCard date={date} active={off === 0} />
+                    {/* brilho varrendo o card quando ele assume o centro */}
+                    {off === 0 && (
+                      <span
+                        key={idx}
+                        className="deck-shine pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[1.5rem]"
+                      />
+                    )}
+                    {/* reflexo no "chão" — cópia espelhada REAL dentro da camada
+                        que anima → desliza junto com o card, sem piscar */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-[calc(100%+12px)] h-full opacity-40 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)]"
+                    >
+                      <div className="h-full -scale-y-100">
+                        <TourCard date={date} active={off === 0} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      {/* ── Controles: setas + bolinhas ── */}
+      <Reveal delay={0.16}>
+        <div className="mt-8 flex items-center justify-center gap-5">
+          <button
+            type="button"
+            aria-label="Edição anterior"
+            onClick={() => { prev(); restart(); }}
+            className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          <div className="flex items-center gap-2.5">
+            {TOUR_DATES.map((d, i) => (
+              <button
+                key={d.id}
+                type="button"
+                aria-label={`Ir para ${d.city}`}
+                onClick={() => { go(i); restart(); }}
+                className={`h-2 rounded-full transition-all duration-400 ${
+                  i === idx
+                    ? 'w-7 bg-brand-gradient shadow-[0_0_10px_rgba(241,37,105,0.6)]'
+                    : 'w-2 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Próxima edição"
+            onClick={() => { next(); restart(); }}
+            className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      </Reveal>
+
+      {/* Rodapé da seção */}
+      <Reveal delay={0.2}>
+        <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
+          Vendas oficiais pela GuichêWeb · Ribeirão Preto é a próxima data
+        </p>
+      </Reveal>
     </section>
   );
 }

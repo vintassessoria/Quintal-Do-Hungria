@@ -36,7 +36,7 @@ export default function LocationSection() {
       <div className="mx-auto grid max-w-wrap items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         {/* ── Conteúdo ── */}
         <Reveal>
-          <SectionTag>O ponto de encontro</SectionTag>
+          <SectionTag>A próxima parada</SectionTag>
           <h2 className="font-display mt-7 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Arena NicNet
             <br />

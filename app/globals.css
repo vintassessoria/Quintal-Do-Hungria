@@ -478,6 +478,39 @@ html {
   animation-iteration-count: infinite;
   will-change: transform, opacity;
 }
+/* ── Deck 3D da turnê ── */
+/* flutuação suave do card ativo */
+@keyframes deckFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+.deck-float {
+  animation: deckFloat 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+/* brilho que varre o card quando ele assume o centro */
+.deck-shine::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 42%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.15) 50%, transparent);
+  transform: translateX(-140%) skewX(-16deg);
+  animation: deckShine 1.05s cubic-bezier(0.33, 1, 0.68, 1) 0.25s forwards;
+}
+@keyframes deckShine {
+  to {
+    transform: translateX(390%) skewX(-16deg);
+  }
+}
+
 /* float suave da figura do Hungria — só em telas de toque (mobile), p/ dar vida sem cursor */
 @keyframes heroFigFloat {
   0%,

@@ -126,7 +126,7 @@ export default function IntroOverlay() {
         </div>
 
         <p className="intro-date mt-6 text-[11px] font-semibold uppercase tracking-[0.34em] text-white/70 sm:text-xs">
-          {EVENT.city} • {EVENT.dateShort} • {EVENT.doorsTime}
+          Do pôr do sol ao centro da noite
         </p>
       </div>
 

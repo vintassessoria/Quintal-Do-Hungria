@@ -136,7 +136,7 @@ export default function HeroSection() {
           {/* texto — canto inferior esquerdo */}
           <div className="max-w-[26rem]">
             <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70">
-              {EVENT.city} · {EVENT.dateShort} · {EVENT.doorsTime}
+              A turnê · Próxima parada: {EVENT.city}
             </span>
             <h1 className="font-display mt-4 text-5xl leading-[0.9] drop-shadow-[0_6px_30px_rgba(0,0,0,0.55)] sm:text-6xl">
               <span className="block text-white">Do pôr do sol</span>
@@ -169,7 +169,10 @@ export default function HeroSection() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-gradient" />
               </span>
             </div>
-            <div className="mt-5 flex items-baseline gap-2">
+            <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.24em] text-gold/90">
+              Próxima parada
+            </p>
+            <div className="mt-1.5 flex items-baseline gap-2">
               <span className="font-display text-3xl text-white">{EVENT.dateShort}</span>
               <span className="text-sm font-semibold text-gold">{EVENT.doorsTime}</span>
             </div>

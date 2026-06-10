@@ -32,7 +32,7 @@ export default function FinalCTA() {
       <div className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8">
         <Reveal>
           <span className="text-[11px] font-semibold uppercase tracking-[0.32em] text-white/55">
-            {EVENT.dateShort} · {EVENT.city} · {EVENT.venueShort}
+            Próxima parada · {EVENT.city} · {EVENT.dateShort}
           </span>
         </Reveal>
 
@@ -59,7 +59,7 @@ export default function FinalCTA() {
                 vai acender
               </span>
               <span className="block text-white" style={{ transform: 'translateZ(28px)' }}>
-                {EVENT.city}.
+                a noite.
               </span>
             </h2>
           </Tilt3DText>
@@ -67,7 +67,8 @@ export default function FinalCTA() {
 
         <Reveal delay={0.16}>
           <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Prepare-se para uma noite inesquecível com o Hungria — do pôr do sol ao centro da noite.
+            Prepare-se para uma noite inesquecível com o Hungria — do pôr do sol ao centro da
+            noite. A próxima parada é {EVENT.city}, {EVENT.date}.
           </p>
         </Reveal>
 

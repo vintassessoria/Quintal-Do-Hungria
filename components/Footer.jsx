@@ -21,7 +21,8 @@ export default function Footer() {
               className="h-12 w-auto"
             />
             <p className="max-w-xs text-xs leading-relaxed text-white/45">
-              {EVENT.date} · {EVENT.doorsTime} · {EVENT.venue}, {EVENT.city}.
+              Do pôr do sol ao centro da noite. Próxima parada: {EVENT.city} · {EVENT.date} ·{' '}
+              {EVENT.venueShort}.
             </p>
           </div>
 

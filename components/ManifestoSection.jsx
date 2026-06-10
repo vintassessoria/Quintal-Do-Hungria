@@ -28,9 +28,9 @@ export default function ManifestoSection() {
             no centro da cidade.
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            O Quintal do Hungria chega a Ribeirão Preto com uma experiência criada para aproximar
-            público e artista — uma noite quente, intensa e inesquecível, do pôr do sol ao centro
-            da noite.
+            O Quintal do Hungria é uma experiência criada para aproximar público e artista — uma
+            noite quente, intensa e inesquecível, do pôr do sol ao centro da noite. E a próxima
+            cidade a viver isso é Ribeirão Preto.
           </p>
         </Reveal>
 
