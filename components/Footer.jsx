@@ -63,11 +63,11 @@ export default function Footer() {
         </nav>
 
         {/* régua de logos — realização (a imagem já traz o título e os logos Best, Hungria e MVR) */}
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <img
             src="/assets/quintal/partners/partners-row.png"
             alt="Realização: Best, Hungria e MVR Produções e Negócios Artísticos"
-            className="w-full max-w-2xl opacity-70 transition-opacity duration-500 hover:opacity-100"
+            className="w-full max-w-[360px] opacity-50 transition-opacity duration-500 hover:opacity-90 sm:max-w-[420px]"
           />
         </div>
 
