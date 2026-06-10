@@ -62,20 +62,12 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* régua de logos — realização, produção e apoio (asset real) */}
-        <div className="mt-14 flex flex-col items-center gap-6">
-          <div className="flex items-center gap-4">
-            <span className="h-px w-12 bg-gradient-to-r from-transparent to-white/20" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/40">
-              Realização · Produção · Apoio
-            </span>
-            <span className="h-px w-12 bg-gradient-to-l from-transparent to-white/20" />
-          </div>
-          {/* SUBSTITUIR/atualizar: /public/assets/quintal/partners/partners-row.png */}
+        {/* régua de logos — realização (a imagem já traz o título e os logos Best, Hungria e MVR) */}
+        <div className="mt-14 flex justify-center">
           <img
             src="/assets/quintal/partners/partners-row.png"
-            alt="Realização, produção e apoiadores do Quintal do Hungria"
-            className="w-full max-w-3xl opacity-55 transition-opacity duration-500 hover:opacity-90"
+            alt="Realização: Best, Hungria e MVR Produções e Negócios Artísticos"
+            className="w-full max-w-2xl opacity-70 transition-opacity duration-500 hover:opacity-100"
           />
         </div>
 
