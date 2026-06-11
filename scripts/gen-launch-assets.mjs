@@ -84,7 +84,7 @@ async function makeOG() {
       <text x="${W / 2}" y="548" text-anchor="middle"
             font-family="Arial, Helvetica, sans-serif" font-size="21"
             font-weight="600" letter-spacing="5" fill="#FFFFFF" fill-opacity="0.72">
-        3 HORAS DE SHOW &#8226; PALCO 360&#176; &#8226; ARENA NICNET
+        3 HORAS DE SHOW &#8226; PALCO 360&#176; &#8226; I9 ALCANS PARK
       </text>
     </svg>
   `);

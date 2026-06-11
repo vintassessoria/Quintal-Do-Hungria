@@ -176,7 +176,7 @@ export default function HeroSection() {
               <span className="text-sm font-semibold text-gold">{EVENT.doorsTime}</span>
             </div>
             <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/45">
-              Arena NicNet · {EVENT.city}
+              {EVENT.venueShort} · {EVENT.city}
             </p>
             <div className="mt-4 border-t border-white/10 pt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
               6H de experiência · 3H de Hungria

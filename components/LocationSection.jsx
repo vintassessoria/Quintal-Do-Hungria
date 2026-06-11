@@ -38,7 +38,7 @@ export default function LocationSection() {
         <Reveal>
           <SectionTag>A próxima parada</SectionTag>
           <h2 className="font-display mt-7 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
-            Arena NicNet
+            {EVENT.venueShort}
             <br />
             <span className="text-gradient">{EVENT.city}</span>
           </h2>
@@ -61,7 +61,7 @@ export default function LocationSection() {
         <Reveal delay={0.12}>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10 bg-ink-2 shadow-panel lg:aspect-[5/4]">
             <iframe
-              title="Mapa — Arena NicNet, Ribeirão Preto"
+              title="Mapa — i9 Alcans Park, Ribeirão Preto"
               src={MAP_EMBED_URL}
               className="absolute inset-0 h-full w-full border-0 [filter:invert(0.92)_hue-rotate(180deg)_brightness(0.95)_contrast(0.92)]"
               loading="lazy"

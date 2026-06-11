@@ -20,13 +20,13 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Quintal do Hungria',
   description:
-    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto, 25 de julho, Arena NicNet. Ingressos pela GuichêWeb.',
+    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto, 25 de julho, i9 Alcans Park. Ingressos pela GuichêWeb.',
   applicationName: 'Quintal do Hungria',
   keywords: [
     'Quintal do Hungria',
     'Hungria',
     'Ribeirão Preto',
-    'Arena NicNet',
+    'i9 Alcans Park',
     'show',
     'palco 360',
     'ingressos',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho · Arena NicNet.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho · i9 Alcans Park.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',

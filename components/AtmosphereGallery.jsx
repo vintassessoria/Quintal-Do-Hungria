@@ -118,7 +118,7 @@ export default function AtmosphereGallery() {
             <span className="text-gradient">Ribeirão</span> vai viver.
           </h2>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60">
-            Registros de shows anteriores do Hungria — a energia que vai tomar conta da Arena NicNet.
+            Registros de shows anteriores do Hungria — a energia que vai tomar conta do Quintal.
           </p>
         </Reveal>
       </div>
