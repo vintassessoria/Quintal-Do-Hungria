@@ -269,9 +269,10 @@ export default function TourDatesSection() {
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
             A próxima parada é <span className="font-semibold text-white">Ribeirão Preto</span>, em{' '}
-            <span className="font-semibold text-white">25 de julho</span> — e{' '}
-            <span className="font-semibold text-white">Curitiba</span> (19 de setembro) também já
-            está com vendas abertas.
+            <span className="font-semibold text-white">25 de julho</span> —{' '}
+            <span className="font-semibold text-white">Curitiba</span> (19/09) e{' '}
+            <span className="font-semibold text-white">Belo Horizonte</span> (24/10) também já estão
+            com vendas abertas.
           </p>
         </Reveal>
       </div>
@@ -382,7 +383,7 @@ export default function TourDatesSection() {
       {/* Rodapé da seção */}
       <Reveal delay={0.2}>
         <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
-          Vendas oficiais: GuichêWeb (Ribeirão Preto) · Bilheteria Digital (Curitiba)
+          Vendas oficiais: GuichêWeb (RP) · Bilheteria Digital (Curitiba) · BaladAPP (BH)
         </p>
       </Reveal>
     </section>
