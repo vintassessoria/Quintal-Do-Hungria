@@ -134,9 +134,6 @@ export default function TourDatesSection() {
   const inView = useRef(true);
   const timer = useRef(0);
   const swipe = useRef(null);
-  const idxRef = useRef(0);
-  const tiltEls = useRef({}); // i → camada interna que recebe o tilt do cursor
-
   const go = useCallback((i) => setIdx(((i % n) + n) % n), [n]);
   const next = useCallback(() => setIdx((v) => (v + 1) % n), [n]);
   const prev = useCallback(() => setIdx((v) => (v - 1 + n) % n), [n]);
@@ -165,51 +162,6 @@ export default function TourDatesSection() {
     return () => {
       mq.removeEventListener('change', apply);
       io.disconnect();
-    };
-  }, []);
-
-  // tilt do card CENTRAL seguindo o cursor (desktop) — em camada interna,
-  // pra não brigar com a transição de leque do wrapper
-  useEffect(() => {
-    idxRef.current = idx;
-    // ao trocar de card, zera o tilt de todos (o novo começa neutro)
-    Object.values(tiltEls.current).forEach((el) => {
-      if (el) el.style.transform = '';
-    });
-  }, [idx]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (matchMedia('(pointer: coarse)').matches) return;
-    const deck = deckRef.current;
-    if (!deck) return;
-    let raf = 0, cx = 0, cy = 0, tx = 0, ty = 0;
-    const loop = () => {
-      cx += (tx - cx) * 0.1;
-      cy += (ty - cy) * 0.1;
-      const el = tiltEls.current[idxRef.current];
-      if (el)
-        el.style.transform = `rotateX(${(-cy * 5).toFixed(2)}deg) rotateY(${(cx * 7).toFixed(2)}deg) translateZ(14px)`;
-      if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) raf = requestAnimationFrame(loop);
-      else raf = 0;
-    };
-    const onMove = (e) => {
-      const r = deck.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-      ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
-      if (!raf) raf = requestAnimationFrame(loop);
-    };
-    const onLeave = () => {
-      tx = 0;
-      ty = 0;
-      if (!raf) raf = requestAnimationFrame(loop);
-    };
-    deck.addEventListener('pointermove', onMove, { passive: true });
-    deck.addEventListener('pointerleave', onLeave);
-    return () => {
-      deck.removeEventListener('pointermove', onMove);
-      deck.removeEventListener('pointerleave', onLeave);
-      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -314,30 +266,23 @@ export default function TourDatesSection() {
                   }
                 }}
               >
-                {/* camada 1: flutuação suave (só no card ativo) */}
-                <div className={`h-full ${off === 0 ? 'deck-float' : ''}`}>
-                  {/* camada 2: tilt do cursor (escrita pelo rAF) */}
+                {/* camada estática (sem transform contínuo) → clique do botão não escapa */}
+                <div className="relative h-full">
+                  <TourCard date={date} active={off === 0} />
+                  {/* brilho varrendo o card quando ele assume o centro */}
+                  {off === 0 && (
+                    <span
+                      key={idx}
+                      className="deck-shine pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[1.5rem]"
+                    />
+                  )}
+                  {/* reflexo no "chão" — cópia espelhada real (decorativa) */}
                   <div
-                    ref={(el) => { tiltEls.current[i] = el; }}
-                    className="relative h-full will-change-transform [transform-style:preserve-3d]"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-[calc(100%+12px)] h-full opacity-40 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)]"
                   >
-                    <TourCard date={date} active={off === 0} />
-                    {/* brilho varrendo o card quando ele assume o centro */}
-                    {off === 0 && (
-                      <span
-                        key={idx}
-                        className="deck-shine pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[1.5rem]"
-                      />
-                    )}
-                    {/* reflexo no "chão" — cópia espelhada REAL dentro da camada
-                        que anima → desliza junto com o card, sem piscar */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-[calc(100%+12px)] h-full opacity-40 blur-[1px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5),transparent_38%)]"
-                    >
-                      <div className="h-full -scale-y-100">
-                        <TourCard date={date} active={off === 0} />
-                      </div>
+                    <div className="h-full -scale-y-100">
+                      <TourCard date={date} active={off === 0} />
                     </div>
                   </div>
                 </div>
