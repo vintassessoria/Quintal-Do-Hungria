@@ -300,6 +300,12 @@ export default function TourDatesSection() {
                 }`}
                 style={styleFor(off)}
                 onClickCapture={(e) => {
+                  // clicou direto no botão de ingresso → deixa abrir a venda (em qualquer card)
+                  if (e.target.closest('a')) {
+                    restart();
+                    return;
+                  }
+                  // clicou no corpo de um card lateral → traz ele pro centro
                   if (off !== 0) {
                     e.preventDefault();
                     e.stopPropagation();
