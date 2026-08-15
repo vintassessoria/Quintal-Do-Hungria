@@ -29,8 +29,8 @@ export default function Stage360Section() {
             para o <span className="text-gradient">centro</span>.
           </h2>
           <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Um palco 360° pensado para diminuir a distância entre o Hungria e o público. Veja como a
-            noite acontece ao seu redor — Frontstage, Backstage e o palco no centro de tudo.
+            Um palco 360° pensado para diminuir a distância entre o Hungria e o público. Veja o mapa
+            de setores e como a noite acontece ao seu redor, com o palco no centro de tudo.
           </p>
         </Reveal>
 
@@ -50,14 +50,22 @@ export default function Stage360Section() {
             }}
           />
 
-          {/* mapa flutuando + rotação 3D reativa ao cursor */}
-          <div className="map-float absolute inset-[8%]">
-            <Artist3D className="flex h-full w-full items-center justify-center" maxY={14} maxX={9}>
-              <img
-                src="/assets/quintal/mapa-3d.webp"
-                alt="Mapa 3D do Quintal do Hungria — Palco 360° no centro, com Frontstage, Backstage e passarelas"
-                className="h-full w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)] [transform:translateZ(46px)]"
-              />
+          {/* mapa de setores flutuando + leve rotação 3D reativa ao cursor */}
+          <div className="map-float absolute inset-[6%]">
+            <Artist3D className="flex h-full w-full items-center justify-center" maxY={8} maxX={5}>
+              <a
+                href="/assets/quintal/mapa-setores.jpeg"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir o mapa de setores em tamanho ampliado"
+                className="flex h-full w-full items-center justify-center [transform:translateZ(40px)]"
+              >
+                <img
+                  src="/assets/quintal/mapa-setores.jpeg"
+                  alt="Mapa de setores do Quintal do Hungria — Palco 360° no centro, com camarotes, pista premium, mesas e área VIP"
+                  className="max-h-full max-w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+                />
+              </a>
             </Artist3D>
           </div>
         </Reveal>
@@ -65,7 +73,7 @@ export default function Stage360Section() {
         {/* dica sutil */}
         <Reveal delay={0.16}>
           <p className="mt-6 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">
-            Mexa o mouse para girar a maquete
+            Mapa de setores · toque para ampliar
           </p>
         </Reveal>
 
