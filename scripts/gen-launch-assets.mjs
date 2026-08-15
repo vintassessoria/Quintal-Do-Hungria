@@ -76,7 +76,7 @@ async function makeOG() {
       <text x="${W / 2}" y="476" text-anchor="middle"
             font-family="Arial, Helvetica, sans-serif" font-size="30"
             font-weight="700" letter-spacing="9" fill="#FFFFFF">
-        RIBEIRÃO PRETO &#8226; 25 JUL &#8226; 17H
+        CURITIBA &#8226; 19 SET &#8226; 21H
       </text>
       <!-- linha gradiente -->
       <rect x="${W / 2 - 150}" y="500" width="300" height="3" rx="1.5" fill="url(#brand)"/>
@@ -84,7 +84,7 @@ async function makeOG() {
       <text x="${W / 2}" y="548" text-anchor="middle"
             font-family="Arial, Helvetica, sans-serif" font-size="21"
             font-weight="600" letter-spacing="5" fill="#FFFFFF" fill-opacity="0.72">
-        3 HORAS DE SHOW &#8226; PALCO 360&#176; &#8226; I9 ALCANS PARK
+        3 HORAS DE SHOW &#8226; PALCO 360&#176; &#8226; LIVE CURITIBA
       </text>
     </svg>
   `);

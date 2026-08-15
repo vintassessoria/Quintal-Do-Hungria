@@ -39,9 +39,9 @@ function ActionCell({ date }) {
         size="sm"
         icon
         variant={date.status === 'active' ? 'primary' : 'secondary'}
-        className="w-full justify-center"
+        className="w-full justify-center text-center"
       >
-        Garantir ingresso
+        {date.ctaLabel || 'Garantir ingresso'}
       </GradientButton>
     );
   }
@@ -106,7 +106,19 @@ function TourCard({ date, active }) {
           {date.city}
         </h3>
 
-        {date.venue ? (
+        {date.notice ? (
+          <ul className="mt-3 space-y-1.5">
+            {date.notice.map((t) => (
+              <li
+                key={t}
+                className="flex items-start gap-2 text-xs leading-snug text-white/60"
+              >
+                <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-brand-gradient" />
+                {t}
+              </li>
+            ))}
+          </ul>
+        ) : date.venue ? (
           <p className="mt-2 flex items-center gap-1.5 text-xs text-white/50">
             <MapPin className="h-3.5 w-3.5 shrink-0 text-gold/80" />
             {date.venue}
@@ -127,7 +139,7 @@ function TourCard({ date, active }) {
 
 export default function TourDatesSection() {
   const n = TOUR_DATES.length;
-  const [idx, setIdx] = useState(0); // começa em Ribeirão Preto (ativo)
+  const [idx, setIdx] = useState(0); // começa em Curitiba (próxima parada / ativo)
   const [compact, setCompact] = useState(false);
   const deckRef = useRef(null);
   const hovering = useRef(false);
@@ -220,11 +232,11 @@ export default function TourDatesSection() {
             <span className="text-gradient">na estrada</span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            A próxima parada é <span className="font-semibold text-white">Ribeirão Preto</span>, em{' '}
-            <span className="font-semibold text-white">25 de julho</span> —{' '}
-            <span className="font-semibold text-white">Curitiba</span> (19/09) e{' '}
-            <span className="font-semibold text-white">Belo Horizonte</span> (24/10) também já estão
-            com vendas abertas.
+            A próxima parada é <span className="font-semibold text-white">Curitiba</span>, em{' '}
+            <span className="font-semibold text-white">19 de setembro</span> —{' '}
+            <span className="font-semibold text-white">Belo Horizonte</span> (24/10) também já está
+            com vendas abertas, e <span className="font-semibold text-white">Ribeirão Preto</span> foi
+            remarcada para 19/12.
           </p>
         </Reveal>
       </div>
@@ -334,7 +346,7 @@ export default function TourDatesSection() {
       {/* Rodapé da seção */}
       <Reveal delay={0.2}>
         <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
-          Vendas oficiais: GuichêWeb (RP) · Bilheteria Digital (Curitiba) · BaladAPP (BH)
+          Vendas oficiais: Bilheteria Digital (Curitiba) · BaladAPP (BH) · GuichêWeb (RP)
         </p>
       </Reveal>
     </section>

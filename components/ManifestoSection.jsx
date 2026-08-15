@@ -29,7 +29,7 @@ export default function ManifestoSection() {
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
             O Quintal do Hungria é uma experiência criada para aproximar público e artista — uma
-            noite quente, intensa e inesquecível. E a próxima cidade a viver isso é Ribeirão Preto.
+            noite quente, intensa e inesquecível. E a próxima cidade a viver isso é Curitiba.
           </p>
         </Reveal>
 
@@ -47,7 +47,7 @@ export default function ManifestoSection() {
             {/* moldura — foto oficial do evento (public/assets/quintal/manifesto.jpg) */}
             <EventPhoto
               src="/assets/quintal/manifesto.jpg"
-              alt="O Quintal do Hungria no centro de Ribeirão Preto"
+              alt="O Quintal do Hungria ao vivo"
               className="tilt-3d aspect-[4/5] rounded-[2rem] border border-white/10 shadow-panel"
               sub="Foto oficial do evento"
               tag="Quintal do Hungria"

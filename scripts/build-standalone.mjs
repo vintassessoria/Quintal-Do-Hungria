@@ -87,10 +87,10 @@ const doc = `<!DOCTYPE html>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#08070D"/>
-<title>Quintal do Hungria · Ribeirão Preto — 25 de Julho</title>
-<meta name="description" content="3 horas de show exclusivo do Hungria em uma experiência 360°. 25 de julho · i9 Alcans Park · Ribeirão Preto. Abertura às 17h."/>
-<meta property="og:title" content="Quintal do Hungria · Ribeirão Preto"/>
-<meta property="og:description" content="3 horas de show exclusivo do Hungria em uma experiência 360°. 25 de julho · i9 Alcans Park."/>
+<title>Quintal do Hungria · Curitiba — 19 de Setembro</title>
+<meta name="description" content="3 horas de show exclusivo do Hungria em uma experiência 360°. 19 de setembro · Live Curitiba · Curitiba. Abertura às 21h."/>
+<meta property="og:title" content="Quintal do Hungria · Curitiba"/>
+<meta property="og:description" content="3 horas de show exclusivo do Hungria em uma experiência 360°. 19 de setembro · Live Curitiba."/>
 <meta property="og:image" content="opengraph-image.png"/>
 <link rel="icon" href="icon.png"/>
 <link rel="apple-touch-icon" href="apple-icon.png"/>

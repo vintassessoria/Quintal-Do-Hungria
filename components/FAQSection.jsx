@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
-import { FAQ, TICKET_URL } from '@/lib/event';
+import { FAQ, TICKET_URL, EVENT } from '@/lib/event';
 import GradientButton from './ui/GradientButton';
 import Reveal from './ui/Reveal';
 import SectionTag from './ui/SectionTag';
@@ -82,8 +82,8 @@ export default function FAQSection() {
               <span className="text-gradient">importantes</span>
             </h2>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/55">
-              Tudo o que você precisa saber para viver o Quintal do Hungria. Ingressos pela
-              plataforma oficial GuichêWeb.
+              Tudo o que você precisa saber para viver o Quintal do Hungria. Ingressos da próxima
+              parada pela plataforma oficial {EVENT.ticketPlatform}.
             </p>
             <div className="mt-8">
               <GradientButton href={TICKET_URL} external variant="secondary" icon>

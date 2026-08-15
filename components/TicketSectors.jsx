@@ -1,4 +1,5 @@
-import { SECTORS, TICKET_URL } from '@/lib/event';
+import { Maximize2 } from 'lucide-react';
+import { SECTORS, TICKET_URL, EVENT } from '@/lib/event';
 import GradientButton from './ui/GradientButton';
 import Reveal from './ui/Reveal';
 import SectionTag from './ui/SectionTag';
@@ -25,6 +26,34 @@ export default function TicketSectors() {
             Garanta seu ingresso para o Quintal do Hungria e prepare-se para viver essa experiência
             de perto.
           </p>
+        </Reveal>
+
+        {/* Mapa de setores oficial do evento (Palco 360°) */}
+        <Reveal delay={0.05} className="mb-14">
+          <figure className="mx-auto max-w-3xl">
+            <a
+              href="/assets/quintal/mapa-setores.jpeg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block overflow-hidden rounded-[1.75rem] border border-white/12 bg-ink shadow-panel transition-colors duration-500 hover:border-white/25"
+              aria-label="Abrir o mapa de setores em tamanho ampliado"
+            >
+              <img
+                src="/assets/quintal/mapa-setores.jpeg"
+                alt="Mapa de setores do Quintal do Hungria — Palco 360° ao centro, camarotes, pista premium, mesas e área VIP"
+                loading="lazy"
+                className="w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+              />
+              {/* dica de ampliar */}
+              <span className="pointer-events-none absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-ink/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm transition-opacity duration-300 group-hover:text-white">
+                <Maximize2 className="h-3.5 w-3.5" />
+                Ampliar
+              </span>
+            </a>
+            <figcaption className="mt-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">
+              Mapa de setores · Palco 360°
+            </figcaption>
+          </figure>
         </Reveal>
 
         {/* Cards de setores */}
@@ -90,7 +119,7 @@ export default function TicketSectors() {
         {/* CTA central forte */}
         <Reveal delay={0.15} className="mt-12 text-center">
           <GradientButton href={TICKET_URL} external size="lg" icon>
-            Garantir ingresso pela GuichêWeb
+            Garantir ingresso pela {EVENT.ticketPlatform}
           </GradientButton>
           <p className="mt-4 text-xs font-medium uppercase tracking-[0.14em] text-white/45">
             Compra segura pela plataforma oficial de vendas

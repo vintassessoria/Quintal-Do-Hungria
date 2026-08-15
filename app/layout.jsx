@@ -20,13 +20,13 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Quintal do Hungria',
   description:
-    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto, 25 de julho, i9 Alcans Park. Ingressos pela GuichêWeb.',
+    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba, 19 de setembro, Live Curitiba. Ingressos pela Bilheteria Digital.',
   applicationName: 'Quintal do Hungria',
   keywords: [
     'Quintal do Hungria',
     'Hungria',
-    'Ribeirão Preto',
-    'i9 Alcans Park',
+    'Curitiba',
+    'Live Curitiba',
     'show',
     'palco 360',
     'ingressos',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho · i9 Alcans Park.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba · 19 de setembro · Live Curitiba.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 25 de julho.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba · 19 de setembro.',
   },
   robots: {
     index: true,
