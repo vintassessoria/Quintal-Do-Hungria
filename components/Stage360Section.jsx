@@ -63,7 +63,7 @@ export default function Stage360Section() {
                 <img
                   src="/assets/quintal/mapa-setores.jpeg"
                   alt="Mapa de setores do Quintal do Hungria — Palco 360° no centro, com camarotes, pista premium, mesas e área VIP"
-                  className="max-h-full max-w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+                  className="max-h-full max-w-full rounded-[1.5rem] object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
                 />
               </a>
             </Artist3D>
