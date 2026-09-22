@@ -26,6 +26,9 @@ function StatusDot({ status }) {
   if (status === 'confirmed') {
     return <span className="h-2.5 w-2.5 shrink-0 rounded-full border border-white/30 bg-white/10" />;
   }
+  if (status === 'past') {
+    return <span className="h-2.5 w-2.5 shrink-0 rounded-full border border-white/15 bg-white/[0.18]" />;
+  }
   return <span className="h-2.5 w-2.5 shrink-0 rounded-full border border-white/15" />;
 }
 
@@ -45,12 +48,19 @@ function ActionCell({ date }) {
       </GradientButton>
     );
   }
-  const label = date.status === 'confirmed' ? 'Vendas em breve' : 'Em breve';
+  const label =
+    date.status === 'past'
+      ? 'Edição encerrada'
+      : date.status === 'confirmed'
+      ? 'Vendas em breve'
+      : 'Em breve';
   return (
     <span
       className={`inline-flex w-full items-center justify-center rounded-full border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] ${
         date.status === 'confirmed'
           ? 'border-white/12 bg-white/[0.03] text-white/55'
+          : date.status === 'past'
+          ? 'border-white/10 bg-white/[0.02] text-white/45'
           : 'border-white/[0.07] bg-transparent text-white/35'
       }`}
     >
@@ -62,6 +72,7 @@ function ActionCell({ date }) {
 function TourCard({ date, active }) {
   const soon = date.status === 'soon';
   const hot = date.status === 'active';
+  const past = date.status === 'past';
 
   return (
     <article
@@ -69,7 +80,7 @@ function TourCard({ date, active }) {
         hot
           ? 'border-ember/40 bg-gradient-to-b from-ember/[0.16] via-ink-2 to-ink shadow-[0_0_60px_-10px_rgba(241,37,105,0.65)]'
           : 'border-white/10 bg-gradient-to-b from-white/[0.05] via-ink-2 to-ink'
-      } ${soon && !active ? 'opacity-90' : ''}`}
+      } ${soon && !active ? 'opacity-90' : ''} ${past ? 'opacity-70 grayscale-[0.25]' : ''}`}
     >
       {hot && (
         <span className="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand-gradient shadow-[0_0_18px_rgba(241,37,105,0.55)]" />
@@ -80,6 +91,11 @@ function TourCard({ date, active }) {
         {hot && (
           <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/[0.12] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white">
             Próxima parada
+          </span>
+        )}
+        {past && (
+          <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white/55">
+            Já passou
           </span>
         )}
       </div>
@@ -139,7 +155,11 @@ function TourCard({ date, active }) {
 
 export default function TourDatesSection() {
   const n = TOUR_DATES.length;
-  const [idx, setIdx] = useState(0); // começa em Belo Horizonte (próxima parada / ativo)
+  // abre centralizado na próxima parada (card 'active'), não no card já realizado
+  const [idx, setIdx] = useState(() => {
+    const i = TOUR_DATES.findIndex((d) => d.status === 'active');
+    return i < 0 ? 0 : i;
+  });
   const [compact, setCompact] = useState(false);
   const deckRef = useRef(null);
   const hovering = useRef(false);
