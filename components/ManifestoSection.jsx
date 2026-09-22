@@ -29,7 +29,7 @@ export default function ManifestoSection() {
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
             O Quintal do Hungria é uma experiência criada para aproximar público e artista — uma
-            noite quente, intensa e inesquecível. E a próxima cidade a viver isso é Curitiba.
+            noite quente, intensa e inesquecível. E a próxima cidade a viver isso é Belo Horizonte.
           </p>
         </Reveal>
 

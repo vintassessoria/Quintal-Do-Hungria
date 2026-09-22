@@ -139,7 +139,7 @@ function TourCard({ date, active }) {
 
 export default function TourDatesSection() {
   const n = TOUR_DATES.length;
-  const [idx, setIdx] = useState(0); // começa em Curitiba (próxima parada / ativo)
+  const [idx, setIdx] = useState(0); // começa em Belo Horizonte (próxima parada / ativo)
   const [compact, setCompact] = useState(false);
   const deckRef = useRef(null);
   const hovering = useRef(false);
@@ -232,11 +232,10 @@ export default function TourDatesSection() {
             <span className="text-gradient">na estrada</span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            A próxima parada é <span className="font-semibold text-white">Curitiba</span>, em{' '}
-            <span className="font-semibold text-white">19 de setembro</span> —{' '}
-            <span className="font-semibold text-white">Belo Horizonte</span> (24/10) também já está
-            com vendas abertas, e <span className="font-semibold text-white">Ribeirão Preto</span> foi
-            remarcada para 19/12.
+            A próxima parada é <span className="font-semibold text-white">Belo Horizonte</span>, em{' '}
+            <span className="font-semibold text-white">24 de outubro</span> — e{' '}
+            <span className="font-semibold text-white">Ribeirão Preto</span> foi remarcada para
+            19/12.
           </p>
         </Reveal>
       </div>
@@ -346,7 +345,7 @@ export default function TourDatesSection() {
       {/* Rodapé da seção */}
       <Reveal delay={0.2}>
         <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
-          Vendas oficiais: Bilheteria Digital (Curitiba) · BaladAPP (BH) · GuichêWeb (RP)
+          Vendas oficiais: BaladAPP (BH) · GuichêWeb (RP)
         </p>
       </Reveal>
     </section>

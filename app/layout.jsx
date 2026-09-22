@@ -20,13 +20,13 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Quintal do Hungria',
   description:
-    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba, 19 de setembro, Live Curitiba. Ingressos pela Bilheteria Digital.',
+    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte, 24 de outubro, Rooftop BH Outlet. Ingressos pela BaladAPP.',
   applicationName: 'Quintal do Hungria',
   keywords: [
     'Quintal do Hungria',
     'Hungria',
-    'Curitiba',
-    'Live Curitiba',
+    'Belo Horizonte',
+    'Rooftop BH Outlet',
     'show',
     'palco 360',
     'ingressos',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba · 19 de setembro · Live Curitiba.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro · Rooftop BH Outlet.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Curitiba · 19 de setembro.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro.',
   },
   robots: {
     index: true,
