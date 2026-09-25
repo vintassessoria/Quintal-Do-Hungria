@@ -388,12 +388,6 @@ export default function AfterMovieSection() {
         </div>
       </div>
 
-      <Reveal delay={0.1}>
-        <p className="relative mt-8 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">
-          Assista com som · 1min34
-        </p>
-      </Reveal>
-
       {/* ── player em tela cheia (portal: acima do header e de tudo) ── */}
       {mounted &&
         createPortal(
