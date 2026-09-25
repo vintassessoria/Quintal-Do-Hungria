@@ -3,7 +3,6 @@ import { ArrowUpRight } from 'lucide-react';
 import { EVENT } from '@/lib/event';
 import Orbit360Graphic from './Orbit360Graphic';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 /**
  * Seção 03 — A noite em números (bento premium).
@@ -16,8 +15,7 @@ export default function ExperienceNumbers() {
 
       <div className="mx-auto max-w-wrap px-5 sm:px-8">
         <Reveal className="mb-12 max-w-2xl">
-          <SectionTag>A noite em números</SectionTag>
-          <h2 className="font-display mt-6 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Uma experiência
             <br />
             feita para <span className="text-gradient">marcar</span>.

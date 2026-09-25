@@ -722,3 +722,28 @@ html.lenis body {
    @media (prefers-reduced-motion: reduce) desligando animações.
    (Se um dia quiser respeitar a preferência do visitante, reintroduzir um
    bloco @media prefers-reduced-motion neutralizando os efeitos.) */
+
+/* ───────────────────────── After movie ────────────────────────────── */
+/* ponto de REC piscando, seco como num visor de câmera */
+@keyframes amRec {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.am-rec {
+  animation: amRec 1.2s steps(1, end) infinite;
+}
+
+/* linhas de varredura sutis (textura de película / monitor) */
+.am-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9) 0 1px,
+    transparent 1px 3px
+  );
+}

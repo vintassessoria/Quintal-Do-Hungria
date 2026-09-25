@@ -46,7 +46,7 @@ export default function Header() {
           </a>
 
           {/* Navegação central (desktop) */}
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex xl:gap-8">
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 lg:flex xl:gap-8">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a

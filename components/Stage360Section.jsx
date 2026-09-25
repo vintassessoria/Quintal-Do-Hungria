@@ -1,6 +1,5 @@
 import Artist3D from './motion/Artist3D';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 const PILLARS = [
   { n: '01', label: 'PROXIMIDADE', text: 'O público mais perto do artista.' },
@@ -22,8 +21,7 @@ export default function Stage360Section() {
       <div className="mx-auto max-w-wrap px-5 sm:px-8">
         {/* Cabeçalho */}
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag className="mx-auto">O centro da experiência</SectionTag>
-          <h2 className="font-display mx-auto mt-7 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display mx-auto text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Todos os olhares
             <br />
             para o <span className="text-gradient">centro</span>.
@@ -53,16 +51,17 @@ export default function Stage360Section() {
           {/* mapa de setores flutuando + leve rotação 3D reativa ao cursor */}
           <div className="map-float absolute inset-[6%]">
             <Artist3D className="flex h-full w-full items-center justify-center" maxY={8} maxX={5}>
+              {/* recorte do pôster (título + mapa) na moldura; "ampliar" abre o pôster inteiro */}
               <a
-                href="/assets/quintal/mapa-setores.jpeg"
+                href="/assets/quintal/mapa-evento.webp"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Abrir o mapa de setores em tamanho ampliado"
+                aria-label="Abrir o mapa do evento em tamanho ampliado"
                 className="flex h-full w-full items-center justify-center [transform:translateZ(40px)]"
               >
                 <img
-                  src="/assets/quintal/mapa-setores.jpeg"
-                  alt="Mapa de setores do Quintal do Hungria — Palco 360° no centro, com camarotes, pista premium, mesas e área VIP"
+                  src="/assets/quintal/mapa-evento-recorte.webp"
+                  alt="Mapa do Quintal do Hungria — Palco 360° no centro, com Área Quintal, Front Open, Backstage Open e Bistrô"
                   className="max-h-full max-w-full rounded-[1.5rem] object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
                 />
               </a>

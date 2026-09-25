@@ -9,9 +9,10 @@ import ComingSoonImage from './ComingSoonImage';
  * • Quando você colocar a foto no caminho indicado, ela aparece sozinha.
  *
  * Props: src, alt, className (moldura/aspecto), sub (texto do fallback),
- *        tag (etiqueta editorial opcional no canto).
+ *        tag (etiqueta editorial opcional no canto), position (ponto de corte,
+ *        ex. '50% 100%').
  */
-export default function EventPhoto({ src, alt = '', className = '', sub, tag }) {
+export default function EventPhoto({ src, alt = '', className = '', sub, tag, position = 'center' }) {
   const [ok, setOk] = useState(true);
   const imgRef = useRef(null);
 
@@ -34,10 +35,11 @@ export default function EventPhoto({ src, alt = '', className = '', sub, tag }) 
         alt={alt}
         onError={() => setOk(false)}
         className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: position }}
       />
-      {/* aterramento + calor (mesma linguagem editorial do resto do site) */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(252,157,0,0.18),transparent_55%)]" />
+      {/* aterramento só na base (não apaga o assunto da foto) + leve calor */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(8,7,13,0.8),transparent_28%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(252,157,0,0.07),transparent_55%)]" />
       {tag && (
         <span className="absolute right-5 top-5 z-[1] text-[10px] font-semibold uppercase tracking-[0.25em] text-white/75">
           {tag}

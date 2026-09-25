@@ -9,6 +9,7 @@ import HeroSection from '@/components/HeroSection';
 import EventTicker from '@/components/EventTicker';
 import TourDatesSection from '@/components/TourDatesSection';
 import ManifestoSection from '@/components/ManifestoSection';
+import AfterMovieSection from '@/components/AfterMovieSection';
 import Stage360Section from '@/components/Stage360Section';
 import NightJourneyTimeline from '@/components/NightJourneyTimeline';
 import TicketSectors from '@/components/TicketSectors';
@@ -45,6 +46,7 @@ export default function Page() {
 
         {/* Narrativa da experiência */}
         <ManifestoSection />
+        <AfterMovieSection />
         <Stage360Section />
         <NightJourneyTimeline />
 

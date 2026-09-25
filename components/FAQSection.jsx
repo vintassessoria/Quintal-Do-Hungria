@@ -6,7 +6,6 @@ import { Plus } from 'lucide-react';
 import { FAQ, TICKET_URL, EVENT } from '@/lib/event';
 import GradientButton from './ui/GradientButton';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 function FaqItem({ item, isOpen, onToggle }) {
   return (
@@ -75,8 +74,7 @@ export default function FAQSection() {
         {/* coluna esquerda */}
         <Reveal>
           <div className="lg:sticky lg:top-28">
-            <SectionTag>Dúvidas</SectionTag>
-            <h2 className="font-display mt-6 text-4xl leading-[0.95] sm:text-5xl">
+            <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl">
               Informações
               <br />
               <span className="text-gradient">importantes</span>

@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { NIGHT_JOURNEY } from '@/lib/event';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 // duração do "desenho" da linha — o cometa e os nós ficam sincronizados com ela
 const LINE_DUR = 1.6;
@@ -23,8 +22,7 @@ export default function NightJourneyTimeline() {
 
       <div className="relative mx-auto max-w-wrap px-5 sm:px-8">
         <Reveal className="mb-16 max-w-2xl">
-          <SectionTag>A jornada da noite</SectionTag>
-          <h2 className="font-display mt-6 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Do primeiro brilho
             <br />
             ao <span className="text-gradient">último hit</span>.

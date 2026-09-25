@@ -1,6 +1,5 @@
 import Orbit360Graphic from './Orbit360Graphic';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 import EventPhoto from './ui/EventPhoto';
 
 /**
@@ -19,8 +18,7 @@ export default function ManifestoSection() {
       <div className="mx-auto grid max-w-wrap items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         {/* ── Texto ── */}
         <Reveal>
-          <SectionTag>Uma noite para viver de perto</SectionTag>
-          <h2 className="font-display mt-7 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Não é só um show.
             <br />
             É o <span className="text-gradient">Quintal</span>
@@ -44,13 +42,14 @@ export default function ManifestoSection() {
           />
 
           <div className="relative">
-            {/* moldura — foto oficial do evento (public/assets/quintal/manifesto.jpg) */}
+            {/* moldura — foto oficial do evento (public/assets/quintal/manifesto.webp).
+                Foto 2:3 numa moldura 4:5 → corte ancorado embaixo, sobra só o teto escuro. */}
             <EventPhoto
-              src="/assets/quintal/manifesto.jpg"
-              alt="O Quintal do Hungria ao vivo"
+              src="/assets/quintal/manifesto.webp"
+              alt="Hungria de costas, braço erguido, diante do neon do Quintal do Hungria"
+              position="50% 100%"
               className="tilt-3d aspect-[4/5] rounded-[2rem] border border-white/10 shadow-panel"
               sub="Foto oficial do evento"
-              tag="Quintal do Hungria"
             />
           </div>
         </Reveal>

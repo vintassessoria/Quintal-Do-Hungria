@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { TOUR_DATES } from '@/lib/event';
 import GradientButton from './ui/GradientButton';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 /* ══════════════════════════════════════════════════════════════════════
    SEÇÃO — TURNÊ / EDIÇÕES (deck 3D em leque)
@@ -245,8 +244,7 @@ export default function TourDatesSection() {
       <div className="mx-auto w-full max-w-wrap px-5 sm:px-8">
         {/* Cabeçalho */}
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag className="mx-auto">As edições</SectionTag>
-          <h2 className="font-display mt-7 text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
             Quintal do Hungria
             <br />
             <span className="text-gradient">na estrada</span>

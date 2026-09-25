@@ -19,6 +19,15 @@
           "value": "frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
         }
       ]
+    },
+    {
+      "source": "/assets/quintal/video/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
     }
   ]
 }

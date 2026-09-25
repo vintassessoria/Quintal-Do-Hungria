@@ -1,7 +1,6 @@
 import { SECTORS, TICKET_URL, EVENT } from '@/lib/event';
 import GradientButton from './ui/GradientButton';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 
 /**
  * Seção 05 — Setores e ingressos.
@@ -15,8 +14,7 @@ export default function TicketSectors() {
 
       <div className="mx-auto max-w-wrap px-5 sm:px-8">
         <Reveal className="mx-auto mb-14 max-w-2xl text-center">
-          <SectionTag className="mx-auto">Escolha como viver essa noite</SectionTag>
-          <h2 className="font-display mt-6 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             Seu lugar
             <br />
             no <span className="text-gradient">Quintal</span>.

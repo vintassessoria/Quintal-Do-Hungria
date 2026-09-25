@@ -35,6 +35,12 @@ yarn-error.log*
 /background intro.png
 /hungria logo cursor.png
 /Régua de logos atualizada site.png
+# vídeos brutos na raiz (ex.: after movie 4K de 240 MB — a versão web fica em public/assets/quintal/video)
+/*.mp4
+/*.mov
+# fotos brutas na raiz (ex.: 14 MB do fotógrafo — a versão web fica em public/assets/quintal)
+/*.jpg
+/*.jpeg
 
 # config de ferramentas locais
 /.claude/

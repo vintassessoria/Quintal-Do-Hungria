@@ -5,7 +5,6 @@ import { createPortal } from 'react-dom';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import { GALLERY_PHOTOS } from '@/lib/event';
 import Reveal from './ui/Reveal';
-import SectionTag from './ui/SectionTag';
 import ComingSoonImage from './ui/ComingSoonImage';
 
 /**
@@ -111,8 +110,7 @@ export default function AtmosphereGallery() {
 
       <div className="mx-auto mb-12 max-w-wrap px-5 sm:px-8">
         <Reveal className="max-w-2xl">
-          <SectionTag>Galeria</SectionTag>
-          <h2 className="font-display mt-6 text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             A noite que
             <br />
             <span className="text-gradient">Ribeirão</span> vai viver.
