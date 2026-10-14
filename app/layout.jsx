@@ -20,13 +20,13 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Quintal do Hungria',
   description:
-    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte, 24 de outubro, Rooftop BH Outlet. Ingressos pela BaladAPP.',
+    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte, 24 de outubro, Terrazo 367. Ingressos pela BaladAPP.',
   applicationName: 'Quintal do Hungria',
   keywords: [
     'Quintal do Hungria',
     'Hungria',
     'Belo Horizonte',
-    'Rooftop BH Outlet',
+    'Terrazo 367',
     'show',
     'palco 360',
     'ingressos',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro · Rooftop BH Outlet.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro · Terrazo 367.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',
