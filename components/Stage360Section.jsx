@@ -48,21 +48,20 @@ export default function Stage360Section() {
             }}
           />
 
-          {/* mapa de setores flutuando + leve rotação 3D reativa ao cursor */}
+          {/* maquete 3D (fundo transparente) flutuando + rotação 3D reativa ao cursor */}
           <div className="map-float absolute inset-[6%]">
-            <Artist3D className="flex h-full w-full items-center justify-center" maxY={8} maxX={5}>
-              {/* recorte do pôster (título + mapa) na moldura; "ampliar" abre o pôster inteiro */}
+            <Artist3D className="flex h-full w-full items-center justify-center" maxY={12} maxX={8}>
               <a
-                href="/assets/quintal/mapa-evento.webp"
+                href="/assets/quintal/mapa-3d-ribeirao.webp"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Abrir o mapa do evento em tamanho ampliado"
+                aria-label="Abrir o mapa 3D do evento em tamanho ampliado"
                 className="flex h-full w-full items-center justify-center [transform:translateZ(40px)]"
               >
                 <img
-                  src="/assets/quintal/mapa-evento-recorte.webp"
-                  alt="Mapa do Quintal do Hungria — Palco 360° no centro, com Área Quintal, Front Open, Backstage Open e Bistrô"
-                  className="max-h-full max-w-full rounded-[1.5rem] object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+                  src="/assets/quintal/mapa-3d-ribeirao.webp"
+                  alt="Mapa 3D do Quintal do Hungria em Ribeirão Preto — Palco 360° no centro, com Frontstage, Backstage, lounges para 10 pessoas, bistrôs para 4 pessoas e passarelas"
+                  className="max-h-full max-w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
                 />
               </a>
             </Artist3D>

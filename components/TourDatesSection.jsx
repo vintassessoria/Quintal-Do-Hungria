@@ -250,10 +250,9 @@ export default function TourDatesSection() {
             <span className="text-gradient">na estrada</span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            A próxima parada é <span className="font-semibold text-white">Belo Horizonte</span>, em{' '}
-            <span className="font-semibold text-white">24 de outubro</span> — e{' '}
-            <span className="font-semibold text-white">Ribeirão Preto</span> foi remarcada para
-            19/12.
+            Curitiba e Belo Horizonte já viveram essa experiência. Agora é a vez de{' '}
+            <span className="font-semibold text-white">Ribeirão Preto</span>, em{' '}
+            <span className="font-semibold text-white">19 de dezembro</span>, na Fazendinha.
           </p>
         </Reveal>
       </div>
@@ -363,7 +362,7 @@ export default function TourDatesSection() {
       {/* Rodapé da seção */}
       <Reveal delay={0.2}>
         <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
-          Vendas oficiais: BaladAPP (BH) · GuichêWeb (RP)
+          Vendas oficiais: GuichêWeb
         </p>
       </Reveal>
     </section>

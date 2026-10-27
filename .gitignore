@@ -41,6 +41,7 @@ yarn-error.log*
 # fotos brutas na raiz (ex.: 14 MB do fotógrafo — a versão web fica em public/assets/quintal)
 /*.jpg
 /*.jpeg
+/*.png
 
 # config de ferramentas locais
 /.claude/

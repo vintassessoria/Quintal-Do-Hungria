@@ -20,13 +20,13 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Quintal do Hungria',
   description:
-    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte, 24 de outubro, Terrazo 367. Ingressos pela BaladAPP.',
+    'O Quintal do Hungria na estrada: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto, 19 de dezembro, Fazendinha. Ingressos pela GuichêWeb.',
   applicationName: 'Quintal do Hungria',
   keywords: [
     'Quintal do Hungria',
     'Hungria',
-    'Belo Horizonte',
-    'Terrazo 367',
+    'Ribeirão Preto',
+    'Fazendinha',
     'show',
     'palco 360',
     'ingressos',
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro · Terrazo 367.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 19 de dezembro · Fazendinha.',
     url: '/',
     siteName: 'Quintal do Hungria',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Quintal do Hungria — A turnê',
     description:
-      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Belo Horizonte · 24 de outubro.',
+      'Quintal do Hungria: 6 horas de experiência em 360°, com 3 horas de show exclusivo do Hungria. Próxima parada: Ribeirão Preto · 19 de dezembro.',
   },
   robots: {
     index: true,
