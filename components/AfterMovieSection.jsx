@@ -12,7 +12,7 @@ import Reveal from './ui/Reveal';
    • after-movie.mp4        → 1080p H.264 + AAC, faststart (~36 MB) — player com som
    • after-movie-teaser.mp4 → trecho 00:27,5–00:41,5 do filme, 720p, sem áudio (~2,6 MB) — loop
    • *-poster.webp          → capas (neon do Quintal / 1º frame do teaser) */
-const DIR = '/assets/quintal/video';
+const DIR = 'https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal';
 const FULL_SRC = `${DIR}/after-movie.mp4`;
 const TEASER_SRC = `${DIR}/after-movie-teaser.mp4`;
 const POSTER = `${DIR}/after-movie-poster.webp`;
