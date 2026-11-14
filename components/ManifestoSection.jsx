@@ -45,7 +45,7 @@ export default function ManifestoSection() {
             {/* moldura — foto oficial do evento (public/assets/quintal/manifesto.webp).
                 Foto 2:3 numa moldura 4:5 → corte ancorado embaixo, sobra só o teto escuro. */}
             <EventPhoto
-              src="/assets/quintal/manifesto.webp"
+              src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/manifesto.webp"
               alt="Hungria de costas, braço erguido, diante do neon do Quintal do Hungria"
               position="50% 100%"
               className="tilt-3d aspect-[4/5] rounded-[2rem] border border-white/10 shadow-panel"

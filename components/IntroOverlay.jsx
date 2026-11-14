@@ -74,7 +74,7 @@ export default function IntroOverlay() {
         <div className="intro-sway absolute inset-0">
           {/* ASSET "background intro" → /public/assets/quintal/backgrounds/hero-intro.png */}
           <Image
-            src="/assets/quintal/backgrounds/hero-intro.png"
+            src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/backgrounds/hero-intro.png"
             alt="Quintal do Hungria — atmosfera tropical noturna"
             fill
             priority
@@ -119,7 +119,7 @@ export default function IntroOverlay() {
           <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[160%] w-[160%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(241,37,105,0.26),rgba(252,157,0,0.12)_45%,transparent_70%)] blur-2xl" />
           {/* LOGO: /public/assets/quintal/logo/logo-quintal.png */}
           <img
-            src="/assets/quintal/logo/logo-quintal.png"
+            src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/logo/logo-quintal.png"
             alt="Quintal do Hungria"
             className="mx-auto w-[78vw] max-w-[300px] drop-shadow-[0_10px_40px_rgba(0,0,0,0.55)] sm:max-w-[390px] lg:max-w-[440px]"
           />

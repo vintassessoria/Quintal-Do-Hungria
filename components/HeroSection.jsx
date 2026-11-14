@@ -115,7 +115,7 @@ export default function HeroSection() {
           <div className="hero-fig-float">
             <img
               data-hero-figure
-              src="/assets/quintal/artist/hungria.webp"
+              src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/artist/hungria.webp"
               alt="Hungria"
               onError={() => setArtistOk(false)}
               className="h-[66svh] w-auto max-w-none object-contain object-bottom opacity-[0.97] sm:h-[74svh] lg:h-[82svh] [mask-image:linear-gradient(to_bottom,#000_74%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_74%,transparent)]"
@@ -159,7 +159,7 @@ export default function HeroSection() {
           <div className="hidden w-[240px] shrink-0 rounded-2xl border border-white/12 bg-white/[0.04] p-5 backdrop-blur-md sm:block">
             <div className="flex items-center justify-between">
               <img
-                src="/assets/quintal/logo/logo-quintal.png"
+                src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/logo/logo-quintal.png"
                 alt="Quintal do Hungria"
                 className="h-7 w-auto opacity-85"
               />

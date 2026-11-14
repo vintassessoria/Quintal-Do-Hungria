@@ -52,14 +52,14 @@ export default function Stage360Section() {
           <div className="map-float absolute inset-[6%]">
             <Artist3D className="flex h-full w-full items-center justify-center" maxY={12} maxX={8}>
               <a
-                href="/assets/quintal/mapa-3d-ribeirao.webp"
+                href="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/mapa-3d-ribeirao.webp"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Abrir o mapa 3D do evento em tamanho ampliado"
                 className="flex h-full w-full items-center justify-center [transform:translateZ(40px)]"
               >
                 <img
-                  src="/assets/quintal/mapa-3d-ribeirao.webp"
+                  src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/mapa-3d-ribeirao.webp"
                   alt="Mapa 3D do Quintal do Hungria em Ribeirão Preto — Palco 360° no centro, com Frontstage, Backstage, lounges para 10 pessoas, bistrôs para 4 pessoas e passarelas"
                   className="max-h-full max-w-full object-contain drop-shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
                 />

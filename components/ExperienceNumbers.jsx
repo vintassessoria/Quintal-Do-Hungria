@@ -29,7 +29,7 @@ export default function ExperienceNumbers() {
               {/* Fundo: foto escura. SUBSTITUIR por foto do artista quando disponível:
                   /public/assets/quintal/artist/ — usando atmosfera por enquanto. */}
               <Image
-                src="/assets/quintal/backgrounds/hero-atmosphere.png"
+                src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/backgrounds/hero-atmosphere.png"
                 alt=""
                 fill
                 sizes="(max-width: 640px) 100vw, 55vw"

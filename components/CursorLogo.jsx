@@ -154,7 +154,7 @@ export default function CursorLogo() {
         {/* A IMG é deslocada -50% horizontal pra centralizar embaixo do pivô.
             Vertical fica em 0: o TOPO da logo coincide com o ponto do mouse. */}
         <img
-          src="/assets/quintal/logo/cursor.png"
+          src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/logo/cursor.png"
           alt=""
           draggable="false"
           className="cursor-logo-img select-none"

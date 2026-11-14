@@ -39,7 +39,7 @@ export default function Header() {
           <a href="#topo" className="flex items-center gap-3 pl-1" aria-label="Quintal do Hungria">
             {/* SUBSTITUIR: /public/assets/quintal/logo/logo-quintal.png */}
             <img
-              src="/assets/quintal/logo/logo-quintal.png"
+              src="https://pub-dfd14236a91140a5a1e41c79f0a83fe4.r2.dev/quintal/assets/logo/logo-quintal.png"
               alt="Quintal do Hungria"
               className="h-8 w-auto sm:h-9"
             />
